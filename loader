@@ -1,8 +1,8 @@
 local PlaceId = game.PlaceId
 
 local Modes = {
-    [1234567890] = "Arsenal",
-    [1234567891] = "Arsenal",
+    [286090429] = "Arsenal",
+    [286090429] = "Arsenal",
     [2788229376] = "BedWars",
     [2788229377] = "BedWars",
     [606849621]  = "Jailbreak",
@@ -10,7 +10,7 @@ local Modes = {
 }
 
 local Scripts = {
-    Arsenal   = "https://raw.githubusercontent.com/yourname/repo/main/arsenal.lua",
+    Arsenal   = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lua",
     BedWars   = "https://raw.githubusercontent.com/yourname/repo/main/bedwars.lua",
     Jailbreak = "https://raw.githubusercontent.com/yourname/repo/main/jailbreak.lua",
 }
