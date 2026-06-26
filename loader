@@ -6,6 +6,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 
 local GamesHub = {
+    -- Fixed the typo here: changed .lu to .lua
     [111958650] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lua", --arsenal
 }
 
@@ -29,8 +30,9 @@ local fetchSuccess, scriptText = pcall(function()
     return game:HttpGet(scriptToLoad)
 end)
 
-if not fetchSuccess or type(scriptText) ~= "string" or #scriptText == 0 then
-    player:Kick("\n[bulo hub]\nNetwork Error!\nCould not fetch the script.")
+-- Added a quick check to catch 404 pages so it doesn't try to compile them in the future
+if not fetchSuccess or type(scriptText) ~= "string" or #scriptText == 0 or scriptText:match("404: Not Found") then
+    player:Kick("\n[bulo hub]\nNetwork Error!\nCould not fetch the script or URL is invalid.")
     return
 end
 
