@@ -6,11 +6,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 
 local GamesHub = {
-    [286090429] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
-    [79137385850056] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
-    [95645135481640] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
-    [98283919607281] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
-    [112464274410705] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu" --arsenal
+    [111958650] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
 }
 
 local currentPlaceId = game.PlaceId
