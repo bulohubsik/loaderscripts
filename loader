@@ -1,6 +1,3 @@
--- https://apis.roblox.com/universes/v1/places/286090429/universe
-
-
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
@@ -9,31 +6,35 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 
 local GamesHub = {
-    [286090429] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", -- JUST ONE MORE ASYM
+    [286090429] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
+    [79137385850056] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
+    [95645135481640] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
+    [98283919607281] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", --arsenal
+    [112464274410705] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu" --arsenal
 }
 
 local currentPlaceId = game.PlaceId
-local currentGameId  = game.GameId  -- Одинаков для всех сабплейсов!
+local currentGameId = game.GameId
 
-local scriptToLoad = GamesHub[currentGameId]
+local scriptToLoad = GamesHub[currentPlaceId] or GamesHub[currentGameId]
 
 if not scriptToLoad then
     player:Kick(
-        "\n[Xenon Hub]\nThis game is not supported!"
-        .. "\nPlace ID: "    .. tostring(currentPlaceId)
-        .. "\nGame ID: "     .. tostring(currentGameId)
+        "\n[bulo hub]\nThis game is not supported!"
+        .. "\nPlace ID: " .. tostring(currentPlaceId)
+        .. "\nGame ID: " .. tostring(currentGameId)
     )
     return
 end
 
-print("Xenon Loader: Game found! GameId: " .. tostring(currentGameId) .. " | PlaceId: " .. tostring(currentPlaceId))
+print("bulo Loader: Game found! GameId: " .. tostring(currentGameId) .. " | PlaceId: " .. tostring(currentPlaceId))
 
 local fetchSuccess, scriptText = pcall(function()
     return game:HttpGet(scriptToLoad)
 end)
 
 if not fetchSuccess or type(scriptText) ~= "string" or #scriptText == 0 then
-    player:Kick("\n[Xenon Hub]\nNetwork Error!\nCould not fetch the script.")
+    player:Kick("\n[bulo hub]\nNetwork Error!\nCould not fetch the script.")
     return
 end
 
