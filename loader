@@ -1,25 +1,53 @@
-local PlaceId = game.PlaceId
+-- https://apis.roblox.com/universes/v1/places/286090429/universe
 
-local Modes = {
-    [286090429] = "Arsenal",
-    [2788229376] = "BedWars",
-    [2788229377] = "BedWars",
-    [606849621]  = "Jailbreak",
-    [606849622]  = "Jailbreak",
+
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
+
+local GamesHub = {
+    [286090429] = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lu", -- JUST ONE MORE ASYM
 }
 
-local Scripts = {
-    Arsenal   = "https://raw.githubusercontent.com/bulohubsik/Scriptsbulosha/refs/heads/main/arsenal.lua",
-    BedWars   = "https://raw.githubusercontent.com/yourname/repo/main/bedwars.lua",
-    Jailbreak = "https://raw.githubusercontent.com/yourname/repo/main/jailbreak.lua",
-}
+local currentPlaceId = game.PlaceId
+local currentGameId  = game.GameId  -- Одинаков для всех сабплейсов!
 
-local GameMode = Modes[PlaceId]
+local scriptToLoad = GamesHub[currentGameId]
 
-if GameMode and Scripts[GameMode] then
-    pcall(function()
-        loadstring(game:HttpGet(Scripts[GameMode]))()
-    end)
-else
-    game:GetService("Players").LocalPlayer:Kick("Unsupported game")
+if not scriptToLoad then
+    player:Kick(
+        "\n[Xenon Hub]\nThis game is not supported!"
+        .. "\nPlace ID: "    .. tostring(currentPlaceId)
+        .. "\nGame ID: "     .. tostring(currentGameId)
+    )
+    return
+end
+
+print("Xenon Loader: Game found! GameId: " .. tostring(currentGameId) .. " | PlaceId: " .. tostring(currentPlaceId))
+
+local fetchSuccess, scriptText = pcall(function()
+    return game:HttpGet(scriptToLoad)
+end)
+
+if not fetchSuccess or type(scriptText) ~= "string" or #scriptText == 0 then
+    player:Kick("\n[Xenon Hub]\nNetwork Error!\nCould not fetch the script.")
+    return
+end
+
+local compiledScript, compileError = loadstring(scriptText)
+
+if not compiledScript then
+    player:Kick("\n[bulo hub]\nCompilation Error!\n" .. tostring(compileError))
+    return
+end
+
+print("bulo hub: Executing script...")
+local execSuccess, execError = pcall(compiledScript)
+
+if not execSuccess then
+    player:Kick("\n[bulo hub]\nRuntime Error!\n" .. tostring(execError))
+    return
 end
