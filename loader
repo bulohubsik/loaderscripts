@@ -2,7 +2,6 @@ local PlaceId = game.PlaceId
 
 local Modes = {
     [286090429] = "Arsenal",
-    [286090429] = "Arsenal",
     [2788229376] = "BedWars",
     [2788229377] = "BedWars",
     [606849621]  = "Jailbreak",
