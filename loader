@@ -1,0 +1,26 @@
+local PlaceId = game.PlaceId
+
+local Modes = {
+    [1234567890] = "Arsenal",
+    [1234567891] = "Arsenal",
+    [2788229376] = "BedWars",
+    [2788229377] = "BedWars",
+    [606849621]  = "Jailbreak",
+    [606849622]  = "Jailbreak",
+}
+
+local Scripts = {
+    Arsenal   = "https://raw.githubusercontent.com/yourname/repo/main/arsenal.lua",
+    BedWars   = "https://raw.githubusercontent.com/yourname/repo/main/bedwars.lua",
+    Jailbreak = "https://raw.githubusercontent.com/yourname/repo/main/jailbreak.lua",
+}
+
+local GameMode = Modes[PlaceId]
+
+if GameMode and Scripts[GameMode] then
+    pcall(function()
+        loadstring(game:HttpGet(Scripts[GameMode]))()
+    end)
+else
+    game:GetService("Players").LocalPlayer:Kick("Unsupported game")
+end
